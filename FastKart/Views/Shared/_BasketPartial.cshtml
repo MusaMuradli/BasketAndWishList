@@ -1,0 +1,38 @@
+﻿@model HeaderViewModel
+<div  class="onhover-div" "basketPartial">
+    <ul class="cart-list">
+        @foreach (var item in Model.Basket ?? new List<BasketViewModel>())
+        {
+            <li class="product-box-contain">
+                <div class="drop-cart">
+                    <a href="product-left-thumbnail.html" class="drop-image">
+                        <img src="~/assets/images/fashion/product/@item.ImageUrl"
+                             class="blur-up lazyload" alt="">
+                    </a>
+
+                    <div class="drop-contain">
+                        <a href="product-left-thumbnail.html">
+                            <h5>@item.Name</h5>
+                        </a>
+                        <h6><span>@item.Count</span> Prise = $@item.Price</h6>
+                        <button class="close-button close_button">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
+            </li>
+
+        }
+    </ul>
+
+    <div class="price-box">
+
+        <h4 class="theme-color fw-bold">$@Model.Sum</h4>
+    </div>
+
+    <div class="button-group">
+        <a href="cart.html" class="btn btn-sm cart-button">View Cart</a>
+        <a href="checkout.html" class="btn btn-sm cart-button theme-bg-color
+                                                    text-white">Checkout</a>
+    </div>
+</div>
