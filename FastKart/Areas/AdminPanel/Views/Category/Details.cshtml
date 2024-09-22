@@ -1,0 +1,19 @@
+﻿@model Category
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                    <h4 class="card-title">Paragraph</h4>
+                    <p class="card-description">
+                        @Model.Name
+                    </p>
+                    <p>
+                        @Model.Description
+                    </p>
+                    <a href="product-left-thumbnail.html">
+                        <img src="~/assets/svg/fashion/@Model.ImageUrl" class="img-fluid blur-up lazyload" alt="" style="max-width: 4%;">
+                    </a>
+            </div>
+        </div>
+    </div>
+</div>
