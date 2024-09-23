@@ -21,7 +21,10 @@
                                 <td>
                                     <a class="btn btn-primary" asp-controller="category" asp-action="details" asp-route-id="@item.Id">Details</a>
                                     <a class="btn btn-warning">Update</a>
-                                    <a class="btn btn-danger" asp-controller="category" asp-action="delete" asp-route-id="@item.Id">Delete</a>
+                                    <form asp-controller="Category" asp-action="Delete" method="post" style="display:inline;">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 <td>
                                 <a href="product-left-thumbnail.html">
                                    <img src="~/assets/svg/fashion/@item.ImageUrl" class="img-fluid blur-up lazyload" alt="">

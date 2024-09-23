@@ -19,7 +19,7 @@ namespace FastKart.Areas.AdminPanel.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
-            var category = await _contex.Categories.FirstOrDefaultAsync(x=>x.Id == id);
+            var category = await _contex.Categories.FirstOrDefaultAsync(x => x.Id == id);
             if (category == null) return NotFound();
             return View(category);
         }
@@ -45,7 +45,33 @@ namespace FastKart.Areas.AdminPanel.Controllers
             await _contex.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var category = await _contex.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            if (category == null) return NotFound();
+
+            return View(category);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var category = await _contex.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            _contex.Categories.Remove(category);
+            await _contex.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
     }
 }
