@@ -21,12 +21,14 @@ namespace FastKart.Controllers
         {
             var categories= _dbContext.Categories.ToList();
             var products = _dbContext.Products.ToList();
+            var sliders =  _dbContext.Sliders.ToList().Last();
             HttpContext.Session.SetString("session", "Hello");
             Response.Cookies.Append("cookie", "cookieValue", new CookieOptions { Expires = DateTimeOffset.Now.AddMinutes(5)});
             var model = new HomeViewModel()
             {
                 Categories = categories,
-                Products = products
+                Products = products,
+                Sliders = sliders
             };
             return View(model);
         }

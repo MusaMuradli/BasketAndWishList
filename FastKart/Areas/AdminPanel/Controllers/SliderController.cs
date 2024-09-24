@@ -53,7 +53,7 @@ public class SliderController : Controller
         }
         var imageName = $"{Guid.NewGuid()} - {slider.ImageFile.FileName}";
         var rootPath = _webHostEnvironment.WebRootPath;
-        var path = Path.Combine(_webHostEnvironment.WebRootPath, "assets", "images", "fashion", "home-banner", imageName);
+        var path = Path.Combine(rootPath, "assets", "images", "fashion", "banner", imageName);
        
         var fs= new FileStream(path, FileMode.Create);
         await slider.ImageFile.CopyToAsync(fs);
