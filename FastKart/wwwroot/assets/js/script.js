@@ -1,3 +1,40 @@
+﻿function addToBasket(id) {
+    $.ajax({
+        type: "POST",
+        url: `/home/addtobasket/${id}`,
+        success: function (response) {
+            $("#basketCount").text(response.count)
+            $("#basketSum").text(response.sum)
+            let basketİtems = $("#basketItems").empty(); 
+            for (let basketItem of response.basketViewModels)
+            {
+                let li = ` <li class="product-box-contain">
+                            <div class="drop-cart">
+                              <a href="product-left-thumbnail.html" class="drop-image">
+                                <img src="../assets/images/fashion/product/${basketItem.imageUrl }"
+                                    class="blur-up lazyload" alt="">
+                                    </a>
+                                       <div class="drop-contain">
+                                    <a href="product-left-thumbnail.html">
+                                       <h5>${basketItem.name}</h5>
+                                    </a>
+                                        <h6><span>${basketItem.count}</span> Price = ${basketItem.price }</h6>
+                                     <button class="close-button  close_button" data-product-id="@item.ProductId">
+                                    <i class="fa-solid fa-xmark"></i>
+                                     </button>
+                                   </div>
+                               </div>
+                            </li>`
+                basketItems.append(li);
+            }
+
+        }
+    });
+}
+
+
+
+
 /*-----------------------------------------------------------------------------------
 
  Template Name: Fastkart
@@ -35,6 +72,16 @@
 
 (function ($) {
     "use strict";
+
+
+
+
+
+
+
+
+
+
     /*=====================
     01. Image to background js
     ==========================*/

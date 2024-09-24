@@ -104,7 +104,14 @@ namespace FastKart.Controllers
             }
             Response.Cookies.Append("basket", JsonConvert.SerializeObject(basketViewModels)); // bu kod setri ifde ve elsede yazilmalidi
 
-            return RedirectToAction(nameof(Index));
+            //return RedirectToAction(nameof(Index));
+            return Json(new {basketViewModels, Count=basketViewModels.Sum(x=>x.Count), Sum=basketViewModels.Sum(y=>y.Count * y.Price)});
+        }
+
+        public async Task<IActionResult> CreateSlider()
+        {
+
+            return View();
         }
 
        

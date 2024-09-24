@@ -1,14 +1,4 @@
-﻿/*-----------------------------------------------------------------------------------
-
- Template Name: Fastkart
- Template URI: themes.pixelstrap.com/Fastkart
- Description: This is Ecommerce website
- Author: Pixelstrap
- Author URI: https://themeforest.net/user/pixelstrap
-
- ----------------------------------------------------------------------------------- */
-
-// 01. Image to background js
+﻿// 01. Image to background js
 // 02. Shop Page Grid Setting Js
 // 03. Footer function js
 // 04. mobile menu active class js
@@ -32,33 +22,6 @@
 // 22. Category Box js
 // 23. remove notication bar js
 // 24. category box js
-
-(function ($) {
-    "use strict";
-
-    $(document).ready(function () {
-        $(".add-to-basket").click(function (e) {
-            e.preventDefault(); 
-
-            var productId = $(this).data("id"); /
-
-            $.ajax({
-                url: '@Url.Action("AddToBasket", "Home")',
-                type: 'POST', 
-                data: { id: productId }, 
-                success: function (response) {
-                    alert("Məhsul səbətə əlavə olundu!"); 
-                },
-                error: function () {
-                    alert("Məhsulu səbətə əlavə etmək mümkün olmadı!"); 
-                }
-            });
-        });
-    });
-
-
-
-
 
 
 

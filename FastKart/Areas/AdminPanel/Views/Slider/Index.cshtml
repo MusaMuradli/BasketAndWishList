@@ -1,0 +1,42 @@
+﻿@model List<Slider>
+<div class="col-lg-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Sliders</h4>
+            <a  asp-controller="Slider" asp-action="Create" class="btn btn-success">Create Slider</a>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>OfferName</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.OfferName</td>
+                                <td>@item.Title</td>
+                                <td>
+                                    <a class="btn btn-primary" asp-controller="category" asp-action="details" asp-route-id="@item.Id">Details</a>
+                                    <a class="btn btn-warning">Update</a>
+                                    <form asp-controller="Category" asp-action="Delete" method="post" style="display:inline;">
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                <td>
+                                    <a href="product-left-thumbnail.html">
+                                        <img src="~/assets/images/fashion/banner/@item.ImageUrl" class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
