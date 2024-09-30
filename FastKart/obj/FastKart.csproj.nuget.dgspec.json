@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Owner\\Desktop\\fastkart\\FastKart\\FastKart.csproj": {}
+    "C:\\Users\\Owner\\Desktop\\CodePB303\\fastkart\\FastKart\\FastKart.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Owner\\Desktop\\fastkart\\FastKart\\FastKart.csproj": {
+    "C:\\Users\\Owner\\Desktop\\CodePB303\\fastkart\\FastKart\\FastKart.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Owner\\Desktop\\fastkart\\FastKart\\FastKart.csproj",
+        "projectUniqueName": "C:\\Users\\Owner\\Desktop\\CodePB303\\fastkart\\FastKart\\FastKart.csproj",
         "projectName": "FastKart",
-        "projectPath": "C:\\Users\\Owner\\Desktop\\fastkart\\FastKart\\FastKart.csproj",
+        "projectPath": "C:\\Users\\Owner\\Desktop\\CodePB303\\fastkart\\FastKart\\FastKart.csproj",
         "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Owner\\Desktop\\fastkart\\FastKart\\obj\\",
+        "outputPath": "C:\\Users\\Owner\\Desktop\\CodePB303\\fastkart\\FastKart\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,6 +45,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.33, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.33, )"

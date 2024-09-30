@@ -1,5 +1,6 @@
 ﻿using FastKart.DAL;
 using FastKart.DAL.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 namespace FastKart.Areas.AdminPanel.Controllers
@@ -16,6 +17,7 @@ namespace FastKart.Areas.AdminPanel.Controllers
             var categories = await _contex.Categories.ToListAsync();
             return View(categories);
         }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -27,6 +29,7 @@ namespace FastKart.Areas.AdminPanel.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category category)
@@ -45,6 +48,7 @@ namespace FastKart.Areas.AdminPanel.Controllers
             await _contex.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -54,7 +58,6 @@ namespace FastKart.Areas.AdminPanel.Controllers
 
             return View(category);
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)

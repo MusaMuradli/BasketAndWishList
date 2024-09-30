@@ -1,5 +1,8 @@
-﻿using FastKart.DAL;
+﻿using FastKart.Constans;
+using FastKart.DAL;
 using FastKart.DAL.Entities;
+using FastKart.Extencions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +11,6 @@ namespace FastKart.Areas.AdminPanel.Controllers;
 [Area("AdminPanel")]
 public class SliderController : Controller
 {
-
     private readonly AppDbContext _context;
     private readonly IWebHostEnvironment _webHostEnvironment;
     public SliderController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
@@ -16,7 +18,6 @@ public class SliderController : Controller
         _context = context;
         _webHostEnvironment = webHostEnvironment;
     }
-
     public async Task<IActionResult> Index()
     {
 
@@ -38,26 +39,21 @@ public class SliderController : Controller
         }
     
 
-        if (!slider.ImageFile.ContentType.Contains("image"))
+        if (!slider.ImageFile.IsImage())
         {
             ModelState.AddModelError("ImageFile", "Please add image format");
 
             return View();
         }
 
-        if ( slider.ImageFile.Length > 1024 * 1024)
+        if (!slider.ImageFile.CheckSize(2))
         {
             ModelState.AddModelError("ImageFile", "Images length should be less than 1gb");
 
             return View();
         }
-        var imageName = $"{Guid.NewGuid()} - {slider.ImageFile.FileName}";
-        var rootPath = _webHostEnvironment.WebRootPath;
-        var path = Path.Combine(rootPath, "assets", "images", "fashion", "banner", imageName);
-       
-        var fs= new FileStream(path, FileMode.Create);
-        await slider.ImageFile.CopyToAsync(fs);
-        fs.Close();
+
+        var imageName = await slider.ImageFile.GenerateFileAsync(FileConstans.SliderImagePath );
         slider.ImageUrl = imageName;
        
         await _context.Sliders.AddAsync(slider);

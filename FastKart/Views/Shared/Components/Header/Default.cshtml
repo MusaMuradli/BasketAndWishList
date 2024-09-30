@@ -594,7 +594,7 @@
                                     </div>
                                 </li>
                                 <li class="right-side">
-                                    <a asp-controller="WishList" asp-action="index" asp-route-id="m" class="btn p-0 position-relative header-wishlist">
+                                    <a asp-controller="wishList" asp-action="index"  asp class="btn p-0 position-relative header-wishlist">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                     </a>
                                 </li>
@@ -661,15 +661,22 @@
                                         <ul class="user-box-name">
                                             <li class="product-box-contain">
                                                 <i></i>
-                                                <a href="login.html">Log In</a>
+                                                @if(User.Identity.IsAuthenticated)
+                                                {
+                                                <a>@User.Identity.Name</a>                                                   
+                                                }else
+                                                {
+                                                  <a asp-controller="account" asp-action="login">Login</a>
+                                                }
                                             </li>
 
                                             <li class="product-box-contain">
-                                                <a href="sign-up.html">Register</a>
+                                                <a asp-controller="account" asp-action="register">Register</a>
                                             </li>
 
                                             <li class="product-box-contain">
-                                                <a href="forgot.html">Forgot Password</a>
+                                                <a asp-controller="account" asp-action="logout">Logout</a>
+
                                             </li>
                                         </ul>
                                     </div>

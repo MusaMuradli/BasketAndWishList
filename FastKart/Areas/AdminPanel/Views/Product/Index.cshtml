@@ -1,0 +1,41 @@
+﻿@model List<Product>
+<div class="col-lg-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Mehsullar</h4>
+            <a asp-controller="product" asp-action="create" class="btn btn-primary">Create</a>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category Name.</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@product.Name</td>
+                                <td>@product.Name</td>
+                                <td>
+                                    <a class="btn btn-primary" asp-controller="product" asp-action="details" asp-route-id="@product.Id">Details</a>
+                                    <a class="btn btn-warning">Update</a>
+                                    <form asp-controller="product" asp-action="Delete" method="post" style="display:inline;">
+                                        <input type="hidden" name="id" value="@product.Id" />
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                <td>
+                                    <a href="product-left-thumbnail.html">
+                                        <img src="~/assets/svg/fashion/@product.ImageUrl" class="img-fluid blur-up lazyload" alt="">
+                                    </a>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
