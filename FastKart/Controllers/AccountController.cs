@@ -154,26 +154,23 @@ namespace FastKart.Controllers
             var existUser = await _userManager.FindByEmailAsync(email);
             if (existUser == null) return BadRequest();
             var result = await _userManager.ResetPasswordAsync(existUser, resetToken, model.Password);
-            return View(nameof(Login));
+            return RedirectToAction("Login");
         }
-        private void SendEmail(string emailid, string subject, string body)
+        private void SendEmail(string email, string subject, string body)
         {
             NetworkCredential credential = new NetworkCredential("musachm@code.edu.az", "ftmt uiud yefh bbrf");
             MailMessage message = new MailMessage();
             message.From = new MailAddress("musachm@code.edu.az");
-            message.To.Add(new MailAddress(emailid));
+            message.To.Add(new MailAddress(email));
             message.Subject = subject;
             message.IsBodyHtml = true;
             message.Body = body;
             using (SmtpClient client = new SmtpClient("smtp.gmail.com", 587))
             {
-
                 client.UseDefaultCredentials = false;
                 client.Credentials = credential;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.EnableSsl = true;
-                //client.Host= "smtp.gmail.com";
-                //client.Port = 587;
                 client.Send(message);
             }
         }
