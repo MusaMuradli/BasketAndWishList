@@ -2,6 +2,8 @@
 using FastKart.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Mail;
+using System.Net;
 
 namespace FastKart.Controllers
 {
@@ -126,8 +128,11 @@ namespace FastKart.Controllers
 
             var resetToken = await _userManager.GeneratePasswordResetTokenAsync(existUser);
             var resetLink= Url.Action(nameof(ResetPassword),"Account", new {model.Email, resetToken},Request.Scheme, Request.Host.ToString());
+            string subject = "test";
+            string body = $"<a href='{resetLink}'>Reset</a>";
+            SendEmail(model.Email, subject, body);
 
-            return View(nameof(EmailView),resetLink);
+            return View();
         }
         public IActionResult EmailView()
         {
@@ -149,9 +154,29 @@ namespace FastKart.Controllers
             var existUser = await _userManager.FindByEmailAsync(email);
             if (existUser == null) return BadRequest();
             var result = await _userManager.ResetPasswordAsync(existUser, resetToken, model.Password);
-            return RedirectToAction(nameof(Login));
+            return View(nameof(Login));
         }
+        private void SendEmail(string emailid, string subject, string body)
+        {
+            NetworkCredential credential = new NetworkCredential("musachm@code.edu.az", "ftmt uiud yefh bbrf");
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("musachm@code.edu.az");
+            message.To.Add(new MailAddress(emailid));
+            message.Subject = subject;
+            message.IsBodyHtml = true;
+            message.Body = body;
+            using (SmtpClient client = new SmtpClient("smtp.gmail.com", 587))
+            {
 
+                client.UseDefaultCredentials = false;
+                client.Credentials = credential;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.EnableSsl = true;
+                //client.Host= "smtp.gmail.com";
+                //client.Port = 587;
+                client.Send(message);
+            }
+        }
 
 
 
